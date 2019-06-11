@@ -1,0 +1,28 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilities</title>
+    <link rel="stylesheet" href="{% static 'utilities/stylesheets/base.css' %}" type="text/css">
+</head>
+<body>
+   <div>
+        <header>
+            <h1>Django_Intro</h1>
+        </header>
+
+       <section>
+            {% block body %}
+            {% endblock %}
+        </section>
+
+
+        <footer>
+            <p>Copyright 2019</p>
+        </footer>
+   </div>
+</body>
+</html>

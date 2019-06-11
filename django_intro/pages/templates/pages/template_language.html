@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template_language</title>
+</head>
+<body>
+    <h3>1. 반복문</h3>
+    {% for menu in menus %}
+        <p>{{ menu }}</p>
+    {%  endfor %}
+    <hr/>
+
+    {% for menu in menus %}
+        <p>{{ forloop.counter }} {{ menu }}</p>
+    {% endfor %}
+    <hr />
+
+    {% for user in empty_list %}
+        <p>{{ user }}</p>
+    {% empty %}
+    <!--empty : for 태그 안에 potinal 하게 있음, 빈 리스트일 때 출력됨-->
+        <p>현재 가입한 유저가 없습니다.</p>
+    {% endfor %}
+    <hr/>
+
+    <h3>2. 조건문</h3>
+    {% if '자장면' in menus %}
+        <p>자장면에는 고춧가루지!</p>
+    {% endif%}
+    <hr/ >
+
+    {% for menu in menus %}
+        {{ forloop.counter }}번 째 도는 중
+        {% if forloop.first %}
+
+    {% endif %}
+    {% endfor %}
+
+    <hr/ >
+
+    <h3>3. length filter 활용</h3>
+    {% for message in messages %}
+        {% if message|length > 5  %}
+            <p>길이가 너무 길어요!</p>
+        {% else %}
+            <p>{{ message }}, {{message|length}}</p>
+        {% endif%}
+    {% endfor%}
+
+    <!--가상의 더미 텍스트 만들기-->
+    <h3>4. lorem ipsum</h3>
+    {% lorem %}
+    <hr />
+    <!--세 단어만 출력(새로고침 해도 항상 같은 단어만 나옴)-->
+    {% lorem 3 w %}
+    <hr/ >
+    <!--단어 매번 다르게 출력-->
+    {% lorem 4 w random%}
+    <hr/>
+    <!--두 문장-->
+    {% lorem 2 p %}
+
+    <h3>5. 글자수 제한 (truncate)</h3>
+    <p>{{ my_sentence|truncatewords:3 }}</p> 단어 단위로 제한
+    <p>{{my_sentence|truncatechars:4}}</p> 문자 단위로 제한
+    <p>{{my_sentence|truncatechars:10}}</p>
+    <hr/ >
+
+    <h3>6. 글자 관련 필터</h3>
+    <p>{{'abc'|length}}</p>
+    <p>{{ 'ABC'|lower }}</p>
+    <p>{{ my_sentence|title}} </p>
+    <p>{{menus|random}}</p>
+
+    <h3>7. 연산</h3>
+    <p>{{ 4|add:6}}</p>
+
+    <h3>8. 날짜표현</h3>
+    <p>{{ datetimenow}}</p>
+    <P>{% now "DATETIME_FORMAT"%}</P>
+    <P>{% now "SHORT_DATETIME_FORMAT" %}</P>
+    <P>{% now "DATE_FORMAT" %}</P>
+    <P>{% now "SHORT_DATE_FORMAT" %}</P>
+
+    <hr>
+    {% now "Y년 m월 d일 (D) h:i" %}
+    {% now "Y" as current_year%}
+    <p>Copyright {{ current_year }}</p>
+    {{ datetimenow|date:"SHORT_DATE_FORMAT"}}
+    <hr>
+
+    <p>{{ 'google.com'|url}}</p>
+
+
+
+</body>
+</html>

@@ -9,15 +9,44 @@
 <hr />
     <p>{{ board.content }}</p>
 <hr />
-    <a href="{% url 'boards:index' %}" class = "btn btn-info">뒤로가기</a>
+
+    <form action="{% url 'boards:comment_create' board.id %}" method="post">
+             {% csrf_token %}
+        <input type="text" name="content" placeholder="댓글을 입력해주세요."/>
+                           <!--name값을 views.py의 def comment_create의 POST.get 값으로 넘겨줘야 한다.-->
+        <input type="submit" value="댓글달기" />
+        <hr/>
+    </form>
+
+    <p>
+        <b>댓글목록</b>
+    </p>
+    {% for comment in comments %}
+        <li>{{ comment.content }}</li>
+        <form action="{% url 'boards:comment_delete' board.id comment.id %}" method="post">
+                {% csrf_token %}
+            <input type="submit" value="댓글삭제" />
+        </form>
+
+
+
+
+        <!--댓글이 없으면 '댓글이 없습니다.' 출력-->
+        {% empty %}
+        <p>댓글이 없습니다.</p>
+
+    {% endfor %}
+
+<hr>
+    <a href="{% url 'boards:index' %}" class = "btn btn-light">뒤로가기</a>
     <!--<a href="/boards/{{board.id}}/delete/">[삭제하기]</a>-->
         <!--위의 get 요청을 post 로 바꾸기 !-->
     <form action="{% url 'boards:delete' board.id %}" method="post">
              {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="삭제하기" />
     </form>
-<hr />
-    <a href="{% url 'boards:edit' board.id %}" class="btm btn-info">수정하기</a>
+
+    <a href="{% url 'boards:edit' board.id %}" class="btn btn-warning">수정하기</a>
 
 
     {% endblock %}

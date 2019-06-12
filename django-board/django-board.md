@@ -4,7 +4,7 @@
 
 - base.html이라는 기본 템플릿 만들어서 board의 html들이 base를 상속받아 사용하도록 설정
  bit.do/m44-docs => share > base.html
- 
+
  #### 요청을 GET 으로 하는 것과 POST 로 하는 것의 차이는?
  ```bash
  - 서버에 무언가를 전달할 때 사용하는 방식
@@ -14,7 +14,7 @@
  - POST 는 서버의 값이나 상태 등을 바꾸기 위해 사용
  
  ```
- 
+
  ```bash
   - new.html 의 method = "post"  / post로 요청
     => ~ 를 주세요 를 ~ 를 해주세요. 의 의미 
@@ -27,8 +27,8 @@
   => 사용자를 index 페이지로 연결 시켜줄 수 있는 redirect 
   => 모든 작성이 끝나면 index 페이지로 redirect
  ```
- 
- 
+
+
  - 게시판의 detail page 로 들어가기 (특정 게시글 하나만 가지고 오기) 
  ```bash
 
@@ -42,7 +42,7 @@
 
  
  ```
- 
+
  - 게시글 올리고 제출하면 바로 상세 페이지로 연결
 ```bash
 
@@ -56,7 +56,7 @@ def create(request):
     return redirect(f'/boards/{board.id}/')   
     # 새로운 글을 작성해서 제출 누르면 바로 상세 페이지로 연결
                     # localhost:8000/boards/6 여기
-``` 
+```
 
 
 
@@ -151,3 +151,4 @@ def edit(request, id) 로 edit 로직과 update 로직 수행
 GET    /boards/<id>/edit
 POST   /boards/<id>/update
 ```
+

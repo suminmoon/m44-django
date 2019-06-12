@@ -1,0 +1,30 @@
+{% extends 'movies/base.html' %}
+
+
+{% block body %}
+
+<h1>Detail Page</h1>
+<h2>{{ movie.title}} </h2>
+<hr />
+
+<p>title: {{ movie.title_origin }}</p>
+<p>vote_count: {{ movie.vote_count }}</p>
+<p>open_date: {{ movie.open_date }}</p>
+<p>genre: {{ movie.genre }}</p>
+<p>score: {{ movie.score }}</p>
+<p>poster_usr: {{ movie.poster_url }}</p>
+<p>description: {{ movie.description }}</p>
+
+<hr />
+
+<a href="{% url 'movies:index' %}" class="btn btn-light">목록</a>
+<a href="{% url 'movies:edit' movie.id %}" class="btn btn-warning">수정</a>
+
+<form action="{% url 'movies:edit' movie.id %}" method="post"></form>
+
+
+
+
+
+
+{% endblock%}

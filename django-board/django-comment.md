@@ -31,24 +31,37 @@ django 에 있는 model 들을 모두 import 한 상태로 사용할 수 있다.
 - class Comment 와 class Board 사용
 
 # 1. 특정 게시글 불러오기
-board = Board.objects.all()
+board = Board.objects.get(pk=11)
 
-# 2.
-comment = Comment() # 인스턴스 생성
+# 2. 댓글 생성
+comment = Comment()  # 인스턴스 생성
+comment.content = '첫번째 댓글'  # 인스턴스변수 할당
+comment.board = board
+comment.save()
 
+comment.id  # 1
+comment.board  # <Board: 11. 수정합니다.>
+comment.board_id  # 11
+comment.board.id  # 11
+comment.board.title  # 수정합니다.
 
 # 3. 댓글 생성 2
-board = Board.objects.get(pk=8)
+board = Board.objects.get(pk=18)
 comment = Comment()
+comment.content = '두번째 댓글입니다.'
+comment.board_id = board.id
+comment.save()
 
-# 4. 
+comment.board  # <Board: 18. 새로운글>
 
-# 5. board 에서 댓글 가져오기
-6번 게시글이 가지고 있는 댓글 가져오기
-board = Board.objects.get(pk=6)
+# 4. 댓글 생성 3
+comment = Comment(board_id=board.id, content='세번째 댓글입니다.')
+comment.save()
+
+# 5. 보드에서 댓글 가져오기
+board = Board.objects.get(pk=11)
 comments = board.comment_set.all()
-comments # <QuerySet [<Comment: <Board(6): Comment(1 - 첫 번째 댓글입니다.)>>, <Comment: <Board(6): Comment(3 -)>>, <Comment: <Board(6): Comment(4 - 세번째 댓글입니다.)>>]>
-
+comments  # <QuerySet [<Comment: <Board(11): Comment(1 - 첫번째 댓글입니다.)>>, <Comment: <Board(11): Comment(3 - 세번째 댓글입니다.)>>]>
 
 ```
 
@@ -58,6 +71,7 @@ comments # <QuerySet [<Comment: <Board(6): Comment(1 - 첫 번째 댓글입니�
 
 ```bash
 - comment 추가하면서 id가 Board에도 있고 Comment에도 있기 때문에 명시적으로 board_id, comment_id로 표현하기
+- 마찬가지로 views.py에 생성하는 함수의 이름도 comment_create식으로 명시하기
 
 ```
 

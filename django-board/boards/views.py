@@ -23,7 +23,8 @@ def new(request):
     else:
         title = request.POST.get('title')
         content = request.POST.get('content')
-        board = Board(title=title, content=content)
+        image = request.FILES.get('image')    # 사용자로 부터 받는 데이터의 종류가 파일 이미지이다.
+        board = Board(title=title, content=content, image=image)
         board.save()
         return redirect('boards:detail', board.id)
 
@@ -83,10 +84,11 @@ def edit(request, board_id):
         # 3. POST 요청이면 사용자가 보낸 데이터를 받아서 수정한 뒤 detail page 로 redirect 한다.
         title = request.POST.get('title')
         content = request.POST.get('content')  # 사용자가 보낸 title 과 content 받기
-
+        image = request.FILES.get('image')  # new
         # 수정 로직
         board.title = title
         board.content = content
+        board.image = image
         board.save()
         return redirect('boards:detail', board_id)  # f'/boards/{id}/' 이거를 이름 지정한 걸로 바꾸기
 

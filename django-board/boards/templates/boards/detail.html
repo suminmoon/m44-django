@@ -3,6 +3,11 @@
 
     {% block body %}
     <h1>Detail</h1>
+ {% if board.image %}
+    <img src="{{ board.image.url }}" alt="{{ board.image.name }}">
+{% else %}
+<p>이미지가 없습니다.</p>
+{% endif %}
     <h2>{{ board.title }}</h2>
     <p>{{ board.id }}번 째 글</p>
     <p>{{ board.created_at}}</p>

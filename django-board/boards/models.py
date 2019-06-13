@@ -1,4 +1,6 @@
 from django.db import models
+from imagekit.models import ProcessedImageField  # new
+from imagekit.processors import Thumbnail  # new
 
 # Create your models here.
 
@@ -6,6 +8,13 @@ from django.db import models
 class Board(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
+    # image = models.ImageField(blank=True)
+    image = ProcessedImageField(
+        upload_to='boards/images',  # 저장 위치 설정 ( media 이후의 경로 설정 )
+        processors=[Thumbnail(200, 300)],
+        format='JPEG',
+        options={'quality': 90},
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

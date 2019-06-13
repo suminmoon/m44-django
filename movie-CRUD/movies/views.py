@@ -12,10 +12,10 @@ def index(request):
 
 
 @require_http_methods(['GET', 'POST'])
-def create(request):
+def create(request, movie_id):
 
     if request.method =='GET':
-        return render(request, 'movies/new.html')
+        return render(request, 'movies/create.html')
     else:
         title = request.POST.get('title')
         title_origin = request.POST.get('title_origin')
@@ -29,24 +29,23 @@ def create(request):
         movie = Movie(title=title, title_origin=title_origin, vote_count=vote_count,
                       open_date=open_date, genre=genre,score=score,poster_url=poster_url,description=description)
         movie.save()
-        return redirect('movies:index')
+        return redirect('movies:detail', movie_id)
 
 
 @require_GET
-def detail(request, id):
-    movie = get_object_or_404(Movie, id=id)
+def detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
     context = {'movie':movie}
     return render(request, 'movies/detail.html', context)
 
 
 @require_http_methods(['GET', 'POST'])
-def edit(request, id):
-
-    movie = get_object_or_404(Movie, id=id)
+def update(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
 
     if request.method=='GET':
         context = {'movie': movie}
-        return render(request, 'movies/edit.html', context)
+        return render(request, 'movies/update.html', context)
 
     else:
         title = request.POST.get('title')
@@ -69,8 +68,11 @@ def edit(request, id):
         movie.description = description
 
         movie.save()
-        return redirect('movies:detail', id)
+        return redirect('movies:detail', movie_id)
 
 
-def delete(request, id):
-    pass
+def delete(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    movie.delete()
+    return redirect('movies:index')
+

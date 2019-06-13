@@ -21,7 +21,7 @@
 <input name="genre" id="genre" type="text" /> <br />
 
 <label for="score">score</label> <br />
-<input name="score" id="score" type="number" /> <br />
+<input name="score" id="score" type="number" min="0" max="5" step="0.5"/> <br />
 
 
 <label for="poster_url">poster_url</label> <br />
@@ -33,6 +33,6 @@
 <input type="submit" />
 
 </form>
-
+<a href="{% url 'movies:index' %}">[메인 페이지]</a>
 
 {% endblock %}

@@ -10,8 +10,9 @@
 
 
     {% for movie in movies %}
-        <p>Title : {{ movie.title }}</p>
-        <p>Score : {{ movie.score }}</p>
+        <p><b>{{ movie.title}}</b></p>
+        <p>개봉일 : {{ movie.open_date }}</p>
+        <p>장르 : {{ movie.genre }}</p>
 
         <a href="{% url 'movies:detail' movie.id %}">[Go Detail]</a>
 <hr />

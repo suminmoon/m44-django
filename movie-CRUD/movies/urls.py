@@ -6,10 +6,10 @@ app_name = 'movies'
 
 urlpatterns = [
 
-    path('', views.index, name = 'index'),
-    path('create/', views.create, name='create'),
-    path('<int:id>/', views.detail, name='detail'),
-    path('<int:id>/edit/', views.edit, name='edit'),
-    path('<int:id>/delete/', views.delete, name='delete'),
+    path('', views.index, name = 'index'),  # 목록
+    path('create/', views.create, name='create'),  # method 분기
+    path('<int:movie_id>/', views.detail, name='detail'),
+    path('<int:movie_id>/update/', views.update, name='update'),
+    path('<int:movie_id>/delete/', views.delete, name='delete'),
 
     ]

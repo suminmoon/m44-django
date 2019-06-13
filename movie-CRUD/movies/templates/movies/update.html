@@ -1,0 +1,38 @@
+{% extends 'movies/base.html' %}
+
+{% block body%}
+
+    <h1>Update Page</h1>
+    <form action="{% url 'movies:update' movie.id %}" method="post">
+     {% csrf_token %}
+<label for="title">Title</label> <br />
+<input name="title" id="title" type="text" value="{{ movie.title}}"/> <br />
+
+<label for="title_origin">title_origin</label> <br />
+<input name="title_origin" id="title_origin" type="text" value="{{ movie.title_origin }}" /> <br />
+
+<label for="vote_count">vote_count</label> <br />
+<input name="vote_count" id="vote_count" type="number" value="{{ movie.vote_count }}"/> <br />
+
+<label for="open_date">open_date</label> <br />
+<input name="open_date" id="open_date" type="date" value="{{ movie.open_date}}" /> <br />
+
+<label for="genre">genre</label> <br />
+<input name="genre" id="genre" type="text" value="{{ movie.genre }}" /> <br />
+
+<label for="score">score</label> <br />
+<input name="score" id="score" type="number" value="{{ movie.score }}" /> <br />
+
+
+<label for="poster_url">poster_url</label> <br />
+<input name="poster_url" id="poster_url" type="text" value="{{ movie.poster_url }}"/> <br />
+
+<label for="description">description</label><br />
+  <textarea name="description" id="description">{{ movie.description}}</textarea><br />
+
+<input type="submit" />
+
+</form>
+<a href="{% url 'movies:detail' movie.id %}">뒤로가기</a>
+
+{% endblock %}
